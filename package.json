@@ -1,8 +1,8 @@
 {
-  "name": "React-Yedi",
+  "name": "@ReactYedi",
   "version": "1.0.0",
   "private": true,
-  "description": "",
+  "description": "yedi 手写的React18框架",
   "main": "index.js",
   "scripts": {
     "build": "tsc",

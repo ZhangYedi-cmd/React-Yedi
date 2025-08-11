@@ -48,6 +48,14 @@ importers:
         specifier: ^5.6.3
         version: 5.9.2
 
+  packages/react:
+    dependencies:
+      '@reactYedi/shared':
+        specifier: workspace:*
+        version: link:../shared
+
+  packages/shared: {}
+
 packages:
 
   /@babel/code-frame@7.27.1:
