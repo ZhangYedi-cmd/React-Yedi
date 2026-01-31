@@ -1,9 +1,10 @@
 {
-  "name": "@reactYedi/shared",
+  "name": "shared",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "type": "module",
+  "module": "src/index.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },

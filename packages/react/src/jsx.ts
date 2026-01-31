@@ -1,20 +1,20 @@
-import { REACT_ELEMENT_TYPE } from '@reactYedi/shared/ReactSymbol';
+import { REACT_ELEMENT_TYPE } from 'shared/ReactSymbol';
 import {
   Key,
   Type,
   Props,
   Ref,
-  ReactElement,
+  ReactElementType,
   ElementType,
-} from '@reactYedi/shared/ReactTypes';
+} from 'shared/ReactTypes';
 
-export const ReactElements = function (
+export const ReactElement = function (
   key: Key,
   type: Type,
   props: Props,
   ref: Ref
 ) {
-  const element: ReactElement = {
+  const element: ReactElementType = {
     key: key,
     type,
     props,
@@ -40,7 +40,6 @@ export const jsx = function (
   let key: Key = null;
   let ref: Ref = null;
   const props: Props = {};
-
   for (const prop in config) {
     const val = config[prop];
 
@@ -71,10 +70,46 @@ export const jsx = function (
     }
   }
 
-  return ReactElements(key, type, props, ref);
+  return ReactElement(key, type, props, ref);
 };
 
-export const createReactElement = function (
+export const jsxDEV = function (type: ElementType, config: any) {
+  console.log(type, config);
+  let key: Key = null;
+  let ref: Ref = null;
+  const props: Props = {};
+  for (const prop in config) {
+    const val = config[prop];
+
+    if (prop === 'key') {
+      if (val !== undefined) {
+        key = `${val}`;
+      }
+      continue;
+    }
+
+    if (prop === 'ref') {
+      if (val !== undefined) {
+        ref = val;
+      }
+      continue;
+    }
+
+    if ({}.hasOwnProperty.call(config, prop)) {
+      props[prop] = val;
+    }
+  }
+  return ReactElement(key, type, props, ref);
+};
+
+/**
+ * 实现被babel调用的jsx转换方法
+ * import { jsx as _jsx } from "react/jsx-runtime";
+ * _jsx("div", {
+ *   children: "123"
+ * });
+ */
+export const createElement = function (
   type: ElementType,
   config: any,
   maybeKey: any
@@ -108,5 +143,5 @@ export const createReactElement = function (
       props[prop] = val;
     }
   }
-  return ReactElements(key, type, props, ref);
+  return ReactElement(key, type, props, ref);
 };
